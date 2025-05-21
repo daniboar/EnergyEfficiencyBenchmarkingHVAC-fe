@@ -19,7 +19,7 @@ export const formatTempChartData = (data: HourData[]) => {
     return data.map(item => ({
         hour: `${item.hour}:00`,
         'Temperatura aerului': item.airTemperature,
-        'Temperatura roua': item.dewTemperature
+        'Temperatura rouă': item.dewTemperature
     }));
 };
 

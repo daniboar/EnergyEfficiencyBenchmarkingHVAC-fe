@@ -38,8 +38,18 @@ const Prediction: React.FC = () => {
             setLoading(true);
             setError(null);
 
-            const data = await getPredictionProfile(buildingName, targetDate);
-            setPredictionData(data);
+            const cacheKey = `prediction_${buildingName}_${targetDate}`;
+
+            const cachedData = localStorage.getItem(cacheKey);
+
+            if (cachedData) {
+                setPredictionData(JSON.parse(cachedData));
+            } else {
+                const data = await getPredictionProfile(buildingName, targetDate);
+                setPredictionData(data);
+
+                localStorage.setItem(cacheKey, JSON.stringify(data));
+            }
         } catch (err) {
             console.error('Eroare la preluarea datelor de predicție:', err);
             setError('Nu s-au putut încărca datele de predicție. Încercați să generați o predicție nouă.');
@@ -69,9 +79,18 @@ const Prediction: React.FC = () => {
         }
     }, [buildingName, targetDate, fetchPredictionData]);
 
+    // Verific daca datele sunt in cache
     useEffect(() => {
-        handleGeneratePrediction();
-    }, [handleGeneratePrediction]);
+        const cacheKey = `prediction_${buildingName}_${targetDate}`;
+        const cachedData = localStorage.getItem(cacheKey);
+
+        if (cachedData) {
+            setPredictionData(JSON.parse(cachedData));
+            setLoading(false);
+        } else {
+            handleGeneratePrediction();
+        }
+    }, [buildingName, targetDate, handleGeneratePrediction]);
 
     const goBack = () => {
         navigate('/');

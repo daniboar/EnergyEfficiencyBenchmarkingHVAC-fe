@@ -54,7 +54,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({
                         onChange={() => onTempSeriesToggle('dewTemp')}
                         sx={{ '&.Mui-checked': { color: '#4caf50' } }}
                     />}
-                    label="Temperatura roua"
+                    label="Temperatura punctului de rouă"
                     sx={{ '& .MuiFormControlLabel-label': { color: '#4caf50', fontWeight: 600 } }}
                 />
             </FormGroup>
@@ -111,7 +111,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({
                             {visibleTempSeries.dewTemp && (
                                 <Line
                                     type="monotone"
-                                    dataKey="Temperatura roua"
+                                    dataKey="Temperatura rouă"
                                     stroke="#4caf50"
                                     strokeWidth={3}
                                     dot={{ r: 5, strokeWidth: 1 }}
@@ -174,7 +174,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({
                                 backgroundColor: '#2196f3',
                                 mr: 1
                             }}></Box>
-                            Temperatura Aerului
+                            Temperatura aerului
                         </Typography>
                         <Typography variant="body2" sx={{ color: '#333' }}>
                             Reprezintă temperatura aerului măsurată la exterior, exprimată în grade Celsius.
@@ -203,7 +203,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({
                                 backgroundColor: '#4caf50',
                                 mr: 1
                             }}></Box>
-                            Temperatura Roua
+                            Temperatura punctului de rouă
                         </Typography>
                         <Typography variant="body2" sx={{ color: '#333' }}>
                             Reprezintă temperatura la care aerul trebuie răcit (fără schimbare de presiune) pentru ca vaporii de apă din aer să se condenseze în picături.
@@ -250,7 +250,7 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({
                                 backgroundColor: '#1e293b'
                             }}></Box>
                             <Typography variant="body2">
-                                <strong>Temperatura roua</strong> oferă context despre nivelul de umiditate relativă, ceea ce influențează și ventilația și performanța echipamentelor HVAC (de ex., dezumidificatoare, schimbătoare de căldură).
+                                <strong>Temperatura rouă</strong> oferă context despre nivelul de umiditate relativă, ceea ce influențează și ventilația și performanța echipamentelor HVAC (de ex., dezumidificatoare, schimbătoare de căldură).
                             </Typography>
                         </Box>
                     </Box>
