@@ -31,7 +31,45 @@
 }
 
 .prediction-back-btn {
-  font-weight: 500 !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  background: linear-gradient(145deg, #f5f7fa, #e4e7ec) !important;
+  color: #455a64 !important;
+  box-shadow: 3px 3px 7px rgba(174, 174, 192, 0.4), -3px -3px 7px rgba(255, 255, 255, 0.65) !important;
+  border: none !important;
+  letter-spacing: 0.3px !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease !important;
+}
+
+.prediction-back-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.7s ease;
+}
+
+.prediction-back-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 4px 4px 10px rgba(174, 174, 192, 0.6), -4px -4px 10px rgba(255, 255, 255, 0.8) !important;
+  color: #1976d2 !important;
+  letter-spacing: 0.5px !important;
+}
+
+.prediction-back-btn:hover::before {
+  left: 100%;
+}
+
+.prediction-back-btn:active {
+  transform: translateY(1px) !important;
+  box-shadow: inset 2px 2px 5px rgba(174, 174, 192, 0.5), inset -2px -2px 5px rgba(255, 255, 255, 0.5) !important;
 }
 
 .prediction-generate-btn {
@@ -204,4 +242,47 @@
 .temp-explanation-card > div:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Stiluri pentru butonul optimizatori */
+.optimizers-button {
+  font-weight: 600 !important;
+  text-transform: none !important;
+  border-radius: 8px !important;
+  padding: 8px 20px !important;
+  background: linear-gradient(145deg, #9c27b0, #673ab7) !important;
+  color: white !important;
+  border: none !important;
+  letter-spacing: 0.5px !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 10px rgba(103, 58, 183, 0.3) !important;
+}
+
+.optimizers-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.optimizers-button:hover {
+  transform: translateY(-2px) !important;
+  background: linear-gradient(145deg, #8e24aa, #5e35b1) !important;
+  box-shadow: 0 6px 15px rgba(103, 58, 183, 0.4) !important;
+  letter-spacing: 0.7px !important;
+}
+
+.optimizers-button:hover::before {
+  left: 100%;
+}
+
+.optimizers-button:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 2px 5px rgba(103, 58, 183, 0.2) !important;
 } 

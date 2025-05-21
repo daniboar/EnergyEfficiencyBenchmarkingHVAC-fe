@@ -71,9 +71,32 @@ const Dashboard: React.FC = () => {
     const filteredData = filterDataByDate(data, selectedDate);
 
     return (
-        <Container maxWidth="xl" className="dashboard-bg">
-            <Box className="dashboard-box">
-                <Paper elevation={6} className="dashboard-paper">
+        <Container
+            maxWidth={false}
+            disableGutters
+            className="dashboard-bg"
+            sx={{
+                minHeight: '100vh',
+                width: '100vw',
+                padding: { xs: '16px', sm: '24px', md: '32px', lg: '40px' },
+                overflow: 'auto'
+            }}
+        >
+            <Box className="dashboard-box" sx={{ height: 'auto', width: '100%' }}>
+                <Paper
+                    elevation={6}
+                    className="dashboard-paper"
+                    sx={{
+                        height: 'auto',
+                        position: 'relative',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        borderRadius: { xs: '16px', md: '20px', lg: '24px' },
+                        overflow: 'hidden',
+                        padding: { xs: '20px', sm: '30px', md: '40px', lg: '48px' },
+                        maxWidth: 'none'
+                    }}
+                >
                     <DashboardHeader />
 
                     <DashboardControls

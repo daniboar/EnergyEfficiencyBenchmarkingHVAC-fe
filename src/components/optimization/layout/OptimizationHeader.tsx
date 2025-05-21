@@ -1,13 +1,12 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
+import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
 
-interface PredictionHeaderProps {
+interface OptimizationHeaderProps {
     buildingName: string;
     targetDate: string;
-    onGoBack: () => void;
 }
 
 // Functie pentru a formata data in formatul dorit
@@ -20,7 +19,6 @@ const formatareData = (dataString: string) => {
         'ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie',
         'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'
     ];
-
 
     const zileSaptamanii = [
         'Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'
@@ -46,16 +44,19 @@ const formatareData = (dataString: string) => {
     };
 };
 
-const PredictionHeader: React.FC<PredictionHeaderProps> = ({
+const OptimizationHeader: React.FC<OptimizationHeaderProps> = ({
     buildingName,
     targetDate,
-    onGoBack,
 }) => {
     const { dataFormatata, ziuaSaptamanii, anotimp } = formatareData(targetDate);
     const navigate = useNavigate();
 
-    const handleOptimizationClick = () => {
-        navigate(`/optimization/${buildingName}/${targetDate}`);
+    const handleBack = () => {
+        navigate(`/prediction/${buildingName}/${targetDate}`);
+    };
+
+    const handleDashboard = () => {
+        navigate('/');
     };
 
     return (
@@ -67,30 +68,30 @@ const PredictionHeader: React.FC<PredictionHeaderProps> = ({
                 width: '100%'
             }}>
                 <Button
-                    onClick={onGoBack}
+                    onClick={handleBack}
                     variant="outlined"
                     startIcon={<ArrowBackIcon />}
                     className="prediction-back-btn"
                     size="large"
                 >
-                    Înapoi la Dashboard
+                    Înapoi la Predicție
                 </Button>
                 <Typography variant="h4" component="h1" sx={{
                     fontWeight: '600 !important',
-                    color: '#164796',
+                    color: '#673ab7',
                     textAlign: 'center',
                     flexGrow: 1
                 }}>
-                    Predicție LSTM pentru Consumul Energetic
+                    Analiza Comparativă a Optimizatorilor
                 </Typography>
                 <Button
-                    onClick={handleOptimizationClick}
+                    onClick={handleDashboard}
                     variant="contained"
-                    endIcon={<CompareArrowsIcon />}
-                    className="optimizers-button"
+                    startIcon={<HomeIcon />}
+                    className="dashboard-button"
                     size="large"
                 >
-                    Vezi Optimizatori
+                    Dashboard
                 </Button>
             </Box>
 
@@ -116,4 +117,4 @@ const PredictionHeader: React.FC<PredictionHeaderProps> = ({
     );
 };
 
-export default PredictionHeader; 
+export default OptimizationHeader; 

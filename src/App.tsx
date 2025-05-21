@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Routes, Route } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
 import Prediction from './components/prediction/Prediction';
+import { Optimization } from './components/optimization';
 
 const theme = createTheme({
   palette: {
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/prediction/:buildingName/:targetDate" element={<Prediction />} />
+        <Route path="/optimization/:buildingName/:targetDate" element={<Optimization />} />
       </Routes>
     </ThemeProvider>
   );
