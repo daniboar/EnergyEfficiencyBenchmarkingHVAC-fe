@@ -29,7 +29,7 @@ const Prediction: React.FC = () => {
 
     const fetchPredictionData = useCallback(async () => {
         if (!buildingName || !targetDate) {
-            setError('Parametrii lipsă: nume clădire sau dată țintă');
+            setError('Lipsesc parametrii');
             setLoading(false);
             return;
         }
@@ -39,20 +39,31 @@ const Prediction: React.FC = () => {
             setError(null);
 
             const cacheKey = `prediction_${buildingName}_${targetDate}`;
-
             const cachedData = localStorage.getItem(cacheKey);
 
             if (cachedData) {
-                setPredictionData(JSON.parse(cachedData));
+                try {
+                    setPredictionData(JSON.parse(cachedData));
+                } catch (err) {
+                    console.error('Eroare la parsarea datelor din cache:', err);
+                    localStorage.removeItem(cacheKey);
+
+                    const data = await getPredictionProfile(buildingName, targetDate);
+                    if (data) {
+                        setPredictionData(data);
+                        localStorage.setItem(cacheKey, JSON.stringify(data));
+                    }
+                }
             } else {
                 const data = await getPredictionProfile(buildingName, targetDate);
-                setPredictionData(data);
-
-                localStorage.setItem(cacheKey, JSON.stringify(data));
+                if (data) {
+                    setPredictionData(data);
+                    localStorage.setItem(cacheKey, JSON.stringify(data));
+                }
             }
         } catch (err) {
-            console.error('Eroare la preluarea datelor de predicție:', err);
-            setError('Nu s-au putut încărca datele de predicție. Încercați să generați o predicție nouă.');
+            console.error('Eroare la preluarea datelor de predictie:', err);
+            setError('Nu s-au putut încărca datele de predictie');
             setPredictionData(null);
         } finally {
             setLoading(false);
@@ -61,7 +72,7 @@ const Prediction: React.FC = () => {
 
     const handleGeneratePrediction = useCallback(async () => {
         if (!buildingName || !targetDate) {
-            setError('Parametrii lipsă: nume clădire sau dată țintă');
+            setError('Parametrii lipsa');
             return;
         }
 
@@ -72,8 +83,8 @@ const Prediction: React.FC = () => {
             await generatePrediction(buildingName, targetDate);
             await fetchPredictionData();
         } catch (err) {
-            console.error('Eroare la generarea predicției:', err);
-            setError('Nu s-a putut genera predicție. Încercați din nou mai târziu.');
+            console.error('Eroare la generarea predictiei:', err);
+            setError('Nu s-a putut genera predictia');
         } finally {
             setGeneratingPrediction(false);
         }
@@ -81,12 +92,22 @@ const Prediction: React.FC = () => {
 
     // Verific daca datele sunt in cache
     useEffect(() => {
+        if (!buildingName || !targetDate) return;
+
         const cacheKey = `prediction_${buildingName}_${targetDate}`;
         const cachedData = localStorage.getItem(cacheKey);
 
         if (cachedData) {
-            setPredictionData(JSON.parse(cachedData));
-            setLoading(false);
+            try {
+                const parsedData = JSON.parse(cachedData);
+                setPredictionData(parsedData);
+                setLoading(false);
+            } catch (err) {
+                // In caz ca datele din cache sunt corupte
+                console.error('Eroare la parsarea datelor din cache:', err);
+                localStorage.removeItem(cacheKey);
+                handleGeneratePrediction();
+            }
         } else {
             handleGeneratePrediction();
         }

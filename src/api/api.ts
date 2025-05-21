@@ -85,7 +85,7 @@ export const getPredictionProfile = async (buildingName: string, targetDate: str
     
     return await response.json();
   } catch (error) {
-    console.error("Eroare la obtinerea profilului de predicție:", error);
+    console.error("Eroare la obtinerea profilului de predictie:", error);
     throw error;
   }
 };

@@ -26,7 +26,7 @@ const ConsumptionBarChart: React.FC<ConsumptionBarChartProps> = ({ data }) => {
             className="chart-container"
         >
             <Typography variant="h5" gutterBottom className="chart-header consumption-bar-header" sx={{ fontWeight: 'bold' }}>
-                Consum energetic orar - Analiză vizuală
+                Profil de consum de energie - Analiză vizuală
             </Typography>
 
             <Box sx={{
