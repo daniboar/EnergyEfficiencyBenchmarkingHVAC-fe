@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Paper } from '@mui/material';
+import { Box, Container, Paper, Typography } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material';
 import { getBuildings, getBuildingData } from '../../api/api';
 import './Dashboard.css';
 import { DataPoint } from './types/DashboardTypes';
-import { filterDataByDate } from './utils/DashboardUtils';
+import { filterDataByDate, getBuildingType, getBuildingName } from './utils/DashboardUtils';
 import DashboardHeader from './layout/DashboardHeader';
 import DashboardControls from './layout/DashboardControls';
 import DashboardChart from './charts/DashboardChart';
@@ -69,7 +69,8 @@ const Dashboard: React.FC = () => {
     };
 
     const filteredData = filterDataByDate(data, selectedDate);
-
+    const buildingType = getBuildingType(selectedBuilding);
+    const buildingName = getBuildingName(selectedBuilding);
     return (
         <Container
             maxWidth={false}
@@ -119,6 +120,57 @@ const Dashboard: React.FC = () => {
                     />
 
                     {selectedBuilding && <BuildingInfo selectedBuilding={selectedBuilding} />}
+
+                    {selectedBuilding && (
+                        <Paper
+                            elevation={0}
+                            sx={{
+                                mt: 4,
+                                p: 3,
+                                bgcolor: '#f8f1fe',
+                                border: '1px solid #d0bbef',
+                                borderRadius: 2
+                            }}
+                        >
+                            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Typography
+                                    variant="h6"
+                                    sx={{
+                                        color: '#5e35b1',
+                                        fontWeight: 600,
+                                        mb: 2,
+                                        textAlign: 'center',
+                                        fontSize: '1.5rem',
+                                        width: '100%'
+                                    }}
+                                >
+                                    De ce clădirile au nume precum "{selectedBuilding}"?
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        color: '#333',
+                                        fontSize: '1.1rem',
+                                        fontWeight: 600,
+                                        width: '100%',
+                                        textAlign: 'center',
+                                        maxWidth: '800px',
+                                        lineHeight: 1.4
+                                    }}
+                                >
+                                    Fiecare clădire primește un cod unic format din trei componente:
+                                    <br />
+                                    <b>AnimalSite_PrimarySpaceUsage_NumeUnic</b>
+                                    <br /><br />
+                                    De exemplu, în "{selectedBuilding}":
+                                    <ul style={{ textAlign: 'left', paddingLeft: '30px', overflowX: 'auto', maxWidth: '100%' }}>
+                                        <li style={{ whiteSpace: 'nowrap' }}><b>Panther</b>: reprezintă codul de identificare al locației (University of Central Florida, Orlando, FL)</li>
+                                        <li style={{ whiteSpace: 'nowrap' }}><b>{buildingType}</b>: reprezintă categoria funcțională a clădirii (educație, birouri, comercial, etc.)</li>
+                                        <li style={{ whiteSpace: 'nowrap' }}><b>{buildingName}</b>: este un nume unic pentru identificarea specifică a clădirii</li>
+                                    </ul>
+                                </Typography>
+                            </Box>
+                        </Paper>
+                    )}
                 </Paper>
             </Box>
         </Container>

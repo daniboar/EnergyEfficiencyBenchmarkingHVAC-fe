@@ -32,7 +32,7 @@ export const formatBarChartData = (data: HourData[]) => {
     }));
 };
 
-// Calculează min, max și media consumului
+// Calculez min, max si media consumului
 export const getMinMaxConsumption = (data: HourData[]) => {
     if (!data || data.length === 0) return { min: 0, max: 0, avg: 0 };
 
@@ -54,7 +54,7 @@ export const getBarColor = (value: number, minValue: number, maxValue: number) =
     return '#e74c3c';                   // roșu
 };
 
-// Formatare număr pentru afișare metrici
+// Formatare numar pentru afisare metrici
 export const formatNumber = (num: number) => {
     return num ? num.toFixed(4) : '0.0000';
 }; 

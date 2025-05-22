@@ -21,7 +21,7 @@ export const useOptimizationData = (buildingName: string, targetDate: string): O
         setState({
           data: null,
           loading: false,
-          error: 'Parametrii lipsă'
+          error: 'Parametrii lipsa'
         });
         return;
       }
@@ -66,7 +66,7 @@ export const useOptimizationData = (buildingName: string, targetDate: string): O
         setState({
           data: null,
           loading: false,
-          error: 'Nu s-au putut încărca datele de optimizare.'
+          error: 'Nu s-au putut incarca datele de optimizare.'
         });
       }
     };

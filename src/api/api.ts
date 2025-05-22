@@ -80,7 +80,7 @@ export const getPredictionProfile = async (buildingName: string, targetDate: str
     const response = await fetch(`${API_URL}/profile-consumption/${buildingName}/${targetDate}`);
     
     if (!response.ok) {
-      throw new Error(`Eroare la obtinerea profilului de predicție: ${response.status}`);
+      throw new Error(`Eroare la obtinerea profilului de predictie: ${response.status}`);
     }
     
     return await response.json();

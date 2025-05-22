@@ -130,7 +130,6 @@ const TemperatureChart: React.FC<TemperatureChartProps> = ({
                 </Typography>
             )}
 
-            {/* Explicații despre tipurile de temperatură */}
             <Box className="temp-explanation-section" sx={{
                 mt: 4,
                 pt: 3,

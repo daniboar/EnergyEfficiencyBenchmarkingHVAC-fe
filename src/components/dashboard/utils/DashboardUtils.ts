@@ -7,6 +7,13 @@ export const getBuildingType = (name: string) => {
     return parts.length > 1 ? parts[1].charAt(0).toUpperCase() + parts[1].slice(1) : '';
 };
 
+// Extrag numele unic al cladirii din identificator (ex: Tina, Teofila)
+export const getBuildingName = (name: string) => {
+    if (!name) return '';
+    const parts = name.split('_');
+    return parts.length > 2 ? parts[2] : '';
+};
+
 // Returnez numele zilei pentru o data anume
 export const getDayName = (date: Date | undefined) => {
     if (!date) return '';

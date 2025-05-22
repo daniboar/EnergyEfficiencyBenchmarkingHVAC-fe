@@ -5,9 +5,8 @@ interface ErrorViewProps {
     message: string;
 }
 
-/**
- * Componenta pentru afișarea mesajelor de eroare
- */
+
+//Componenta pentru afisarea mesajelor de eroare
 const ErrorView: React.FC<ErrorViewProps> = ({ message }) => {
     return (
         <Fade in={true} timeout={800}>

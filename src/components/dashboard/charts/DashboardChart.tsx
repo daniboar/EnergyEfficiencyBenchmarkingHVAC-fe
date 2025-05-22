@@ -124,8 +124,11 @@ const DashboardChart: React.FC<DashboardChartProps> = ({
                 )}
             </Box>
 
-            {/* Seciunea explicativa despre baseline - afisata doar daca avem date */}
-            {!loading && !error && filteredData.length > 0 && <BaselineExplanation />}
+            {!loading && !error && filteredData.length > 0 && (
+                <Box sx={{ mt: 1 }}>
+                    <BaselineExplanation />
+                </Box>
+            )}
         </>
     );
 };

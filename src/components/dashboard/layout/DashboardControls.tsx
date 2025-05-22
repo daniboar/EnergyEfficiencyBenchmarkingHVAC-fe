@@ -62,7 +62,7 @@ const DashboardControls: React.FC<DashboardControlsProps> = ({
                     dateFormat="yyyy-MM-dd"
                     minDate={minDate}
                     maxDate={maxDate}
-                    placeholderText="Alege o dată (opțional)"
+                    placeholderText="Selectează o dată"
                     isClearable
                     customInput={<input className="dashboard-datepicker-input" />}
                 />
