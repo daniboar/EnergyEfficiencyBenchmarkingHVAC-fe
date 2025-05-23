@@ -192,7 +192,7 @@ const AlgorithmInfo: React.FC = () => {
 
                         <Typography variant="body1" sx={{ textAlign: 'justify', lineHeight: 1.6 }}>
                             3. <strong>Actualizarea poziției și vitezei:</strong> Fiecare particulă își actualizează poziția și viteza bazându-se pe:
-                            <br />&nbsp;&nbsp;• Cea mai bună poziție personală (pbest)
+                            <br />&nbsp;&nbsp;&nbsp;• Cea mai bună poziție personală (pbest)
                             <br />&nbsp;&nbsp;• Cea mai bună poziție globală (gbest) sau cea mai bună poziție din vecinătate
                         </Typography>
 

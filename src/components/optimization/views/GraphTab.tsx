@@ -42,7 +42,7 @@ const GraphTab: React.FC<GraphTabProps> = ({ data }) => {
             </Typography>
 
             <Typography variant="body1" sx={{ px: 3, mt: 4, mb: 3, textAlign: 'justify', lineHeight: 1.7 }}>
-                Graficele de mai sus prezintă performanța celor trei algoritmi de optimizare (Ant Colony Optimization,
+                Datele de mai sus reprezintă performanța celor trei algoritmi de optimizare (Ant Colony Optimization,
                 Genetic Algorithm și Particle Swarm Optimization) în comparație cu consumul real și baseline-ul.
                 Se poate observa că toate cele trei metode de optimizare reușesc să reducă consumul energetic
                 în diferite momente ale zilei, cu economii variabile.
@@ -67,7 +67,7 @@ const GraphTab: React.FC<GraphTabProps> = ({ data }) => {
                 }
             }}>
                 Pentru a vedea mai multe detalii despre fiecare algoritm, inclusiv principiile de funcționare
-                și avantajele/dezavantajele fiecăruia, accesați tab-ul "Detalii Algoritmi".
+                și avantajele/dezavantajele fiecăruia, puteți accesa tab-ul <b>"Detalii Algoritmi"</b>.
             </Typography>
         </>
     );

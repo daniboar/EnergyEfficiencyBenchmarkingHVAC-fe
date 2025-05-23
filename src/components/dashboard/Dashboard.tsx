@@ -162,12 +162,14 @@ const Dashboard: React.FC = () => {
                                     <b>AnimalSite_PrimarySpaceUsage_NumeUnic</b>
                                     <br /><br />
                                     De exemplu, în "{selectedBuilding}":
-                                    <ul style={{ textAlign: 'left', paddingLeft: '30px', overflowX: 'auto', maxWidth: '100%' }}>
-                                        <li style={{ whiteSpace: 'nowrap' }}><b>Panther</b>: reprezintă codul de identificare al locației (University of Central Florida, Orlando, FL)</li>
-                                        <li style={{ whiteSpace: 'nowrap' }}><b>{buildingType}</b>: reprezintă categoria funcțională a clădirii (educație, birouri, comercial, etc.)</li>
-                                        <li style={{ whiteSpace: 'nowrap' }}><b>{buildingName}</b>: este un nume unic pentru identificarea specifică a clădirii</li>
-                                    </ul>
                                 </Typography>
+                                <Box sx={{ width: '100%', maxWidth: '800px', mx: 'auto' }}>
+                                    <ul style={{ textAlign: 'left', paddingLeft: '30px', overflowX: 'auto', maxWidth: '100%' }}>
+                                        <li style={{ whiteSpace: 'nowrap' }}><b style={{ color: '#5e35b1', fontSize: 20 }}>Panther</b>: reprezintă codul de identificare al locației (University of Central Florida, Orlando, FL)</li>
+                                        <li style={{ whiteSpace: 'nowrap' }}><b style={{ color: '#5e35b1', fontSize: 20 }}>{buildingType}</b>: reprezintă categoria funcțională a clădirii (educație, birouri, comercial, etc.)</li>
+                                        <li style={{ whiteSpace: 'nowrap' }}><b style={{ color: '#5e35b1', fontSize: 20 }}>{buildingName}</b>: este un nume unic pentru identificarea specifică a clădirii</li>
+                                    </ul>
+                                </Box>
                             </Box>
                         </Paper>
                     )}

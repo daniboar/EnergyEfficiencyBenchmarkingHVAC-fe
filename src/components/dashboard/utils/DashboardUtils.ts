@@ -34,7 +34,7 @@ export const buildingTypeExplanations: { [key: string]: string } = {
     Assembly: "Clădiri destinate adunărilor publice precum săli de conferințe, teatre, și săli de sport. Acestea au un consum energetic ridicat în perioadele de utilizare intensă.",
     Education: "Instituții educaționale precum școli și universități. Acestea au un model de consum sezonier, cu vârfuri în timpul anului școlar și consum redus în vacanțe.",
     Lodging: "Clădiri de cazare precum hoteluri și pensiuni. Acestea au un consum continuu dar variabil în funcție de ocupare.",
-    Office: "Clădiri de birouri cu program regulat. Acestea au un consum predictibil în timpul săptămânii de lucru și redus în weekend.",
+    Office: "Clădiri de birouri cu program regulat. Acestea au un consum mai mare în timpul săptămânii de lucru și redus în weekend.",
     Parking: "Structuri de parcare, adesea cu ventilație mecanică.",
     Retail: "Spații comerciale precum magazine și mall-uri. Acestea au un consum ridicat datorită iluminatului, climatizării și traficului intens de clienți."
 };
@@ -50,7 +50,7 @@ export const buildingTypeEfficiencyTips: { [key: string]: string[] } = {
     Education: [
         "Sincronizarea funcționării sistemelor HVAC cu programul școlar și vacanțele",
         "Implementarea controlului zonal pentru a climatiza doar spațiile ocupate",
-        "Utilizarea răcirii naturale când este posibil (în special noaptea)",
+        "Utilizarea răcirii naturale când este posibil (mai ales noaptea)",
         "Instruirea personalului și elevilor despre comportamente de economisire a energiei"
     ],
     Lodging: [

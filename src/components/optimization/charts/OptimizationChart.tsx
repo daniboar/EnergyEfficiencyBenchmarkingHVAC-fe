@@ -295,7 +295,7 @@ const OptimizationChart: React.FC<OptimizationChartProps> = ({ data, title }) =>
             {selectedTab === 1 && (
                 <Box sx={{ padding: 2 }}>
                     <Typography variant="h6" sx={{ fontWeight: 600, marginBottom: 2, color: '#512da8' }}>
-                        Economii Estimate de Energie
+                        Estimarea Economisirii Energiei
                     </Typography>
 
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginBottom: 4, justifyContent: 'center' }}>

@@ -10,6 +10,8 @@ interface MetricsPanelProps {
 }
 
 const MetricsPanel: React.FC<MetricsPanelProps> = ({ mse, mae, smape, r2 }) => {
+    const normalizedR2 = r2 > 1 ? 1 : (r2 < -1 ? -1 : r2);
+
     return (
         <Box className="prediction-metrics" sx={{
             display: 'flex',
@@ -34,7 +36,7 @@ const MetricsPanel: React.FC<MetricsPanelProps> = ({ mse, mae, smape, r2 }) => {
             </Paper>
             <Paper className="metric-card" sx={{ flex: '1 1 20%', minWidth: '220px', p: 3, borderRadius: '10px' }}>
                 <Typography variant="subtitle1" sx={{ fontSize: 'rem', mb: 1, fontWeight: 'bold' }}>R²</Typography>
-                <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#1976d2' }}>{formatNumber(r2)}</Typography>
+                <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#1976d2' }}>{formatNumber(normalizedR2)}</Typography>
             </Paper>
         </Box>
     );
