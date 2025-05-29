@@ -24,7 +24,10 @@ const Prediction: React.FC = () => {
     });
     const [visibleTempSeries, setVisibleTempSeries] = useState({
         airTemp: true,
-        dewTemp: true
+        dewTemp: true,
+        windSpeed: false,
+        windDirection: false,
+        precipDepth1HR: false
     });
 
     const fetchPredictionData = useCallback(async () => {
@@ -124,7 +127,7 @@ const Prediction: React.FC = () => {
         }));
     };
 
-    const handleTempSeriesToggle = (series: 'airTemp' | 'dewTemp') => {
+    const handleTempSeriesToggle = (series: 'airTemp' | 'dewTemp' | 'windSpeed' | 'windDirection' | 'precipDepth1HR') => {
         setVisibleTempSeries(prev => ({
             ...prev,
             [series]: !prev[series]

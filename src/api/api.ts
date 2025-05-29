@@ -14,6 +14,9 @@ export interface HourData {
   consumption: ConsumptionData;
   dewTemperature: number;
   hour: number;
+  windSpeed: number;
+  windDirection: number;
+  precipDepth1HR: number;
 }
 
 export interface PredictionProfile {

@@ -60,7 +60,7 @@ const ConsumptionBarChart: React.FC<ConsumptionBarChartProps> = ({ data }) => {
                 <Divider sx={{ my: 2 }} />
                 <Typography>
                     Graficul evidențiază orele cu consum maxim (roșu) și minim (verde).
-                    <strong> Media consumului: {avgConsumption.toFixed(2)} kWh</strong>
+                    <strong> Media de baseline pe ziua respectivă: {avgConsumption.toFixed(2)} kWh</strong>
                 </Typography>
             </Box>
 
@@ -108,7 +108,7 @@ const ConsumptionBarChart: React.FC<ConsumptionBarChartProps> = ({ data }) => {
                                 verticalAlign="bottom"
                                 height={50}
                                 payload={[
-                                    { value: 'Media consumului', type: 'line', color: '#607d8b' }
+                                    { value: 'Media de baseline', type: 'line', color: '#607d8b' }
                                 ]}
                                 wrapperStyle={{ paddingTop: '20px' }}
                             />

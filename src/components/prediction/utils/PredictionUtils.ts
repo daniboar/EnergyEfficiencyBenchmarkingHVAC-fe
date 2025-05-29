@@ -19,7 +19,10 @@ export const formatTempChartData = (data: HourData[]) => {
     return data.map(item => ({
         hour: `${item.hour}:00`,
         'Temperatura aerului': item.airTemperature,
-        'Temperatura rouă': item.dewTemperature
+        'Temperatura rouă': item.dewTemperature,
+        'Viteza vântului': item.windSpeed,
+        'Direcția vântului': item.windDirection,
+        'Precipitații': item.precipDepth1HR < 0 ? 0 : item.precipDepth1HR
     }));
 };
 
@@ -36,11 +39,12 @@ export const formatBarChartData = (data: HourData[]) => {
 export const getMinMaxConsumption = (data: HourData[]) => {
     if (!data || data.length === 0) return { min: 0, max: 0, avg: 0 };
 
-    const values = data.map(item => item.consumption.real);
+    const baselineValues = data.map(item => item.consumption.baseline);
+    
     return {
-        min: Math.min(...values),
-        max: Math.max(...values),
-        avg: values.reduce((sum, val) => sum + val, 0) / values.length
+        min: Math.min(...baselineValues),
+        max: Math.max(...baselineValues),
+        avg: baselineValues.reduce((sum, val) => sum + val, 0) / baselineValues.length
     };
 };
 

@@ -16,12 +16,6 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label })
                         <strong>{entry.name}:</strong> {entry.value.toFixed(2)} kWh
                     </p>
                 ))}
-                {payload[0]?.payload.AirTemp !== undefined && (
-                    <p><strong>Temperatura aer:</strong> {payload[0]?.payload.AirTemp}°C</p>
-                )}
-                {payload[0]?.payload.DewTemp !== undefined && (
-                    <p><strong>Temperatura rouă:</strong> {payload[0]?.payload.DewTemp}°C</p>
-                )}
             </div>
         );
     }
