@@ -24,28 +24,10 @@ const GraphTab: React.FC<GraphTabProps> = ({ data }) => {
                     textAlign: 'center',
                     color: '#512da8',
                     fontWeight: 600,
-                    position: 'relative',
-                    '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        width: '60px',
-                        height: '3px',
-                        background: 'linear-gradient(90deg, #673ab7, #9c27b0)',
-                        bottom: '-8px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        borderRadius: '2px'
-                    }
+                    position: 'relative'
                 }}
             >
                 Analiza performanței algoritmilor de optimizare
-            </Typography>
-
-            <Typography variant="body1" sx={{ px: 3, mt: 4, mb: 3, textAlign: 'justify', lineHeight: 1.7 }}>
-                Datele de mai sus reprezintă performanța celor trei algoritmi de optimizare (Ant Colony Optimization,
-                Genetic Algorithm și Particle Swarm Optimization) în comparație cu consumul real și baseline-ul.
-                Se poate observa că toate cele trei metode de optimizare reușesc să reducă consumul energetic
-                în diferite momente ale zilei, cu economii variabile.
             </Typography>
 
             <Typography variant="body1" sx={{
@@ -66,9 +48,11 @@ const GraphTab: React.FC<GraphTabProps> = ({ data }) => {
                     borderRadius: '2px'
                 }
             }}>
-                Pentru a vedea mai multe detalii despre fiecare algoritm, inclusiv principiile de funcționare
-                și avantajele/dezavantajele fiecăruia, puteți accesa tab-ul <b>"Detalii Algoritmi"</b>.
-            </Typography>
+                Datele de mai sus reprezintă performanța celor trei algoritmi de optimizare (Ant Colony Optimization,
+                Genetic Algorithm și Particle Swarm Optimization) în comparație cu consumul de baseline.
+                Se poate observa că toate cele trei metode de optimizare reușesc să reducă consumul energetic
+                în diferite momente ale zilei, cu economii variabile.
+            </Typography >
         </>
     );
 };

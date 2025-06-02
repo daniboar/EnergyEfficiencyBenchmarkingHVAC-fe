@@ -88,6 +88,7 @@ const OptimizationChart: React.FC<OptimizationChartProps> = ({ data, title }) =>
     const calculateSavings = () => {
         let totalReal = 0;
         let totalBaseline = 0;
+        let totalPrediction = 0;
         let totalAco = 0;
         let totalGa = 0;
         let totalPso = 0;
@@ -95,22 +96,53 @@ const OptimizationChart: React.FC<OptimizationChartProps> = ({ data, title }) =>
         data.forEach(hour => {
             totalReal += hour.consumption.real;
             totalBaseline += hour.consumption.baseline;
+            totalPrediction += hour.consumption.prediction;
             totalAco += hour.consumption.acoOptimization;
             totalGa += hour.consumption.gaOptimization;
             totalPso += hour.consumption.psoOptimization;
         });
 
-        const acoSavings = totalReal - totalAco;
-        const gaSavings = totalReal - totalGa;
-        const psoSavings = totalReal - totalPso;
+        // Calculez economiile în raport cu baseline-ul, nu cu consumul real
+        const acoSavings = totalBaseline - totalAco;
+        const gaSavings = totalBaseline - totalGa;
+        const psoSavings = totalBaseline - totalPso;
 
-        const acoSavingsPercent = (acoSavings / totalReal) * 100;
-        const gaSavingsPercent = (gaSavings / totalReal) * 100;
-        const psoSavingsPercent = (psoSavings / totalReal) * 100;
+        const acoSavingsPercent = (acoSavings / totalBaseline) * 100;
+        const gaSavingsPercent = (gaSavings / totalBaseline) * 100;
+        const psoSavingsPercent = (psoSavings / totalBaseline) * 100;
+
+        // Creez un array cu algoritmii si economiile lor pentru sortare
+        const algorithms = [
+            {
+                name: 'Ant Colony Optimization',
+                shortName: 'ACO',
+                savings: acoSavings,
+                savingsPercent: acoSavingsPercent,
+                totalConsumption: totalAco
+            },
+            {
+                name: 'Genetic Algorithm',
+                shortName: 'GA',
+                savings: gaSavings,
+                savingsPercent: gaSavingsPercent,
+                totalConsumption: totalGa
+            },
+            {
+                name: 'Particle Swarm Optimization',
+                shortName: 'PSO',
+                savings: psoSavings,
+                savingsPercent: psoSavingsPercent,
+                totalConsumption: totalPso
+            }
+        ];
+
+        // Sortez algoritmii după economii (cel mai mic la cel mai mare)
+        algorithms.sort((a, b) => a.savingsPercent - b.savingsPercent);
 
         return {
             totalReal,
             totalBaseline,
+            totalPrediction,
             totalAco,
             totalGa,
             totalPso,
@@ -119,11 +151,22 @@ const OptimizationChart: React.FC<OptimizationChartProps> = ({ data, title }) =>
             psoSavings,
             acoSavingsPercent,
             gaSavingsPercent,
-            psoSavingsPercent
+            psoSavingsPercent,
+            sortedAlgorithms: algorithms
         };
     };
 
     const savings = calculateSavings();
+
+    // Functie pentru a obține culoarea bazata pe pozitia in ranking
+    const getAlgorithmColor = (index: number) => {
+        const colors = [
+            { bg: '#ffebee', text: '#d32f2f', main: '#f44336' }, // Rosu pentru cel mai rau
+            { bg: '#fff8e1', text: '#f57c00', main: '#ff9800' }, // Galben pentru mediu
+            { bg: '#e8f5e9', text: '#2e7d32', main: '#4caf50' }  // Verde pentru cel mai bun
+        ];
+        return colors[index] || colors[2];
+    };
 
     return (
         <Box className="optimization-chart-container">
@@ -299,62 +342,31 @@ const OptimizationChart: React.FC<OptimizationChartProps> = ({ data, title }) =>
                     </Typography>
 
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginBottom: 4, justifyContent: 'center' }}>
-                        <Box sx={{
-                            padding: 3,
-                            borderRadius: 2,
-                            backgroundColor: '#ede7f6',
-                            minWidth: 200,
-                            textAlign: 'center',
-                            boxShadow: '0 3px 10px rgba(0,0,0,0.08)'
-                        }}>
-                            <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#673ab7', marginBottom: 1 }}>
-                                Ant Colony Optimization
-                            </Typography>
-                            <Typography variant="h5" sx={{ fontWeight: 700, color: '#512da8' }}>
-                                {savings.acoSavingsPercent.toFixed(2)}%
-                            </Typography>
-                            <Typography variant="body1">
-                                {savings.acoSavings.toFixed(2)} kWh economisiți
-                            </Typography>
-                        </Box>
-
-                        <Box sx={{
-                            padding: 3,
-                            borderRadius: 2,
-                            backgroundColor: '#e8f5e9',
-                            minWidth: 200,
-                            textAlign: 'center',
-                            boxShadow: '0 3px 10px rgba(0,0,0,0.08)'
-                        }}>
-                            <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#4caf50', marginBottom: 1 }}>
-                                Genetic Algorithm
-                            </Typography>
-                            <Typography variant="h5" sx={{ fontWeight: 700, color: '#2e7d32' }}>
-                                {savings.gaSavingsPercent.toFixed(2)}%
-                            </Typography>
-                            <Typography variant="body1">
-                                {savings.gaSavings.toFixed(2)} kWh economisiți
-                            </Typography>
-                        </Box>
-
-                        <Box sx={{
-                            padding: 3,
-                            borderRadius: 2,
-                            backgroundColor: '#ffeef3',
-                            minWidth: 200,
-                            textAlign: 'center',
-                            boxShadow: '0 3px 10px rgba(0,0,0,0.08)'
-                        }}>
-                            <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#f74a8a', marginBottom: 1 }}>
-                                Particle Swarm Optimization
-                            </Typography>
-                            <Typography variant="h5" sx={{ fontWeight: 700, color: '#d81b60' }}>
-                                {savings.psoSavingsPercent.toFixed(2)}%
-                            </Typography>
-                            <Typography variant="body1">
-                                {savings.psoSavings.toFixed(2)} kWh economisiți
-                            </Typography>
-                        </Box>
+                        {savings.sortedAlgorithms.map((algorithm, index) => {
+                            const colors = getAlgorithmColor(index);
+                            return (
+                                <Box key={algorithm.shortName} sx={{
+                                    padding: 3,
+                                    borderRadius: 2,
+                                    backgroundColor: colors.bg,
+                                    minWidth: 200,
+                                    textAlign: 'center',
+                                    boxShadow: '0 3px 10px rgba(0,0,0,0.08)',
+                                    border: `2px solid ${colors.main}`,
+                                    position: 'relative'
+                                }}>
+                                    <Typography variant="subtitle1" sx={{ fontWeight: 600, color: colors.text, marginBottom: 1, marginTop: 1 }}>
+                                        {algorithm.name}
+                                    </Typography>
+                                    <Typography variant="h5" sx={{ fontWeight: 700, color: colors.main }}>
+                                        {algorithm.savingsPercent.toFixed(2)}%
+                                    </Typography>
+                                    <Typography variant="body1" sx={{ color: colors.text }}>
+                                        {algorithm.savings.toFixed(2)} kWh economisiți
+                                    </Typography>
+                                </Box>
+                            );
+                        })}
                     </Box>
 
                     <Typography variant="h6" sx={{ fontWeight: 600, marginBottom: 2, color: '#512da8' }}>
@@ -403,44 +415,33 @@ const OptimizationChart: React.FC<OptimizationChartProps> = ({ data, title }) =>
                             boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
                         }}>
                             <Typography variant="subtitle2" sx={{ color: '#616161' }}>
-                                ACO
+                                Predicție
                             </Typography>
-                            <Typography variant="h6" sx={{ fontWeight: 700, color: '#673ab7' }}>
-                                {savings.totalAco.toFixed(2)} kWh
-                            </Typography>
-                        </Box>
-
-                        <Box sx={{
-                            padding: 2,
-                            borderRadius: 2,
-                            backgroundColor: '#f5f5f5',
-                            minWidth: 180,
-                            textAlign: 'center',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
-                        }}>
-                            <Typography variant="subtitle2" sx={{ color: '#616161' }}>
-                                GA
-                            </Typography>
-                            <Typography variant="h6" sx={{ fontWeight: 700, color: '#4caf50' }}>
-                                {savings.totalGa.toFixed(2)} kWh
+                            <Typography variant="h6" sx={{ fontWeight: 700, color: '#000000' }}>
+                                {savings.totalPrediction.toFixed(2)} kWh
                             </Typography>
                         </Box>
 
-                        <Box sx={{
-                            padding: 2,
-                            borderRadius: 2,
-                            backgroundColor: '#f5f5f5',
-                            minWidth: 180,
-                            textAlign: 'center',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
-                        }}>
-                            <Typography variant="subtitle2" sx={{ color: '#616161' }}>
-                                PSO
-                            </Typography>
-                            <Typography variant="h6" sx={{ fontWeight: 700, color: '#f74a8a' }}>
-                                {savings.totalPso.toFixed(2)} kWh
-                            </Typography>
-                        </Box>
+                        {savings.sortedAlgorithms.map((algorithm, index) => {
+                            const colors = getAlgorithmColor(index);
+                            return (
+                                <Box key={`total-${algorithm.shortName}`} sx={{
+                                    padding: 2,
+                                    borderRadius: 2,
+                                    backgroundColor: '#f5f5f5',
+                                    minWidth: 180,
+                                    textAlign: 'center',
+                                    boxShadow: '0 2px 8px rgba(0,0,0,0.05)'
+                                }}>
+                                    <Typography variant="subtitle2" sx={{ color: '#616161' }}>
+                                        {algorithm.shortName}
+                                    </Typography>
+                                    <Typography variant="h6" sx={{ fontWeight: 700, color: colors.main }}>
+                                        {algorithm.totalConsumption.toFixed(2)} kWh
+                                    </Typography>
+                                </Box>
+                            );
+                        })}
                     </Box>
                 </Box>
             )}

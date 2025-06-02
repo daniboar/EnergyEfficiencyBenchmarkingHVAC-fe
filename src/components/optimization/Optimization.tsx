@@ -7,7 +7,6 @@ import TabPanel from './ui/TabPanel';
 import LoadingView from './views/LoadingView';
 import ErrorView from './views/ErrorView';
 import GraphTab from './views/GraphTab';
-import AlgorithmTab from './views/AlgorithmTab';
 import useOptimizationData from './hooks/useOptimizationData';
 
 const Optimization: React.FC = () => {
@@ -82,18 +81,10 @@ const Optimization: React.FC = () => {
                                     label="Grafice Comparative"
                                     className={`optimization-tab ${activeTab === 0 ? 'selected-tab' : ''}`}
                                 />
-                                <Tab
-                                    label="Detalii Algoritmi"
-                                    className={`optimization-tab ${activeTab === 1 ? 'selected-tab' : ''}`}
-                                />
                             </Tabs>
 
                             <TabPanel value={activeTab} index={0}>
                                 <GraphTab data={optimizationData.values} />
-                            </TabPanel>
-
-                            <TabPanel value={activeTab} index={1}>
-                                <AlgorithmTab />
                             </TabPanel>
                         </>
                     )}
