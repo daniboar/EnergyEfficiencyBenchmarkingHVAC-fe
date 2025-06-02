@@ -61,13 +61,7 @@ const Dashboard: React.FC = () => {
     };
 
     const handleDateChange = (date: Date | null) => {
-        if (date) {
-            const newDate = new Date(date);
-            newDate.setMonth(newDate.getMonth() + 1);
-            setSelectedDate(newDate);
-        } else {
-            setSelectedDate(undefined);
-        }
+        setSelectedDate(date || undefined);
     };
 
     const handleResetDate = () => {
